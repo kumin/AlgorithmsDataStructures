@@ -19,6 +19,7 @@ class Solution:
                             j = j + 1
                     else:
                         not_found = False
+        return False
 
 
 if __name__ == '__main__':
