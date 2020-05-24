@@ -1,27 +1,24 @@
-class Solution:
-    def compare(self, cs: str, cp: str):
-        return cs == cp or cp == "."
+from typing import List
 
-    def isMatch(self, s: str, p: str) -> bool:
-        j = 0
-        for i in range(len(s)):
-            not_found = True
-            while not_found:
-                if self.compare(s[i], p[j]):
-                    not_found = False
-                    j = j + 1
+
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        start = -1
+        end = -1
+        for index, num in enumerate(nums):
+            if num == target:
+                if start == -1:
+                    start = index
                 else:
-                    if p[j] == "*":
-                        if self.compare(s[i], p[j - 1]):
-                            not_found = False
-                        else:
-                            not_found = False
-                            j = j + 1
-                    else:
-                        not_found = False
-        return False
+                    end = index
+            elif num > target:
+                break
+        if end == -1:
+            end = start
+
+        return [start, end]
 
 
 if __name__ == '__main__':
     solution = Solution()
-    print(solution.isMatch("aa", "a*"))
+    print(solution.searchRange([5, 7, 7, 8, 8, 10], 5))
