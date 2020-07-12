@@ -33,7 +33,7 @@ class Solution1:
         for i in range(n):
             if s[i] in self.vowels:
                 current_count += 1
-            if i + 1 > k and s[k - i] in self.vowels:
+            if i + 1 > k and s[i - k] in self.vowels:
                 current_count -= 1
             if current_count > max_v:
                 max_v = current_count
@@ -43,4 +43,4 @@ class Solution1:
 
 if __name__ == '__main__':
     solution = Solution1()
-    print(solution.maxVowels('weallloveyou', 7))
+    print(solution.maxVowels('weallloveyou', 2))
