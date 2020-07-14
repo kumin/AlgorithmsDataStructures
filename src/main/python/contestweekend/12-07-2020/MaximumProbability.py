@@ -16,5 +16,6 @@ class Solution:
             key = str(i) + '_' + str(end)
             if key in graph:
                 p[i] = graph[key]
+        trace = {}
 
     # def dfs(self, n: int, graph: Dict[str, float], start: int, end: int) -> float:
