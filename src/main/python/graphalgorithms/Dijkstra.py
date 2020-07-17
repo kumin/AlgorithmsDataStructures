@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict
 
 
 class Dijkstra:
@@ -15,11 +15,12 @@ class Dijkstra:
         p = [self.MAX_WEIGHT] * n
         p[start] = 0
         visited = [False] * n
-        visited[start] = True
         trace = {}
-        queue = [start]
-        while queue:
-            u = queue.pop(0)
+        while True:
+            u = self.findNearestNode(p, visited)
+            if u == end:
+                break
+            visited[u] = True
             for i in range(n):
                 key = str(u) + "_" + str(i)
                 if key in graph:
@@ -27,11 +28,20 @@ class Dijkstra:
                     if pathLength < p[i]:
                         p[i] = pathLength
                         trace[i] = u
-                    if not visited[i]:
-                        queue.append(i)
-                        visited[i] = True
-            if u == end:
-                break
+
+        self.printShortestPath(p, trace, start, end)
+        return p[end]
+
+    def findNearestNode(self, p: List[float], visited: List[bool]) -> int:
+        min = self.MAX_WEIGHT
+        for i in range(len(p)):
+            if p[i] <= min and not visited[i]:
+                min = p[i]
+                minNode = i
+
+        return minNode
+
+    def printShortestPath(self, p: List[float], trace: Dict[int, int], start: int, end: int):
         if p[end] != self.MAX_WEIGHT:
             v = trace[end]
             path = str(end) + '<-'
@@ -40,11 +50,9 @@ class Dijkstra:
                 v = trace[v]
             print(path + str(start))
 
-        return p[end]
-
 
 if __name__ == '__main__':
     dijkstra = Dijkstra()
     print(
-        dijkstra.shortestPath(4, [[0, 1], [0, 3], [0, 2], [1, 3], [2, 3], [1, 2]], [1, 10, 10, 4, 1, 1], 0,
-                              2))
+        dijkstra.shortestPath(5, [[0, 1], [0, 3], [0, 2], [2, 3], [1, 2]], [4, 10, 1, 10, 1], 0,
+                              4))
