@@ -10,7 +10,7 @@ class Solution:
     def pseudoPalindromicPaths(self, root):
 
         def dfs(root, count=0):
-            if not root : return 0
+            if not root: return 0
             count ^= 1 << (root.val - 1)
             res = dfs(root.left, count) + dfs(root.right, count)
             if root.left == root.right:
