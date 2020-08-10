@@ -21,6 +21,23 @@ class Solution:
 
         return min_positive
 
+    def firstMissingPositive1(self, nums: List[int]) -> int:
+        if not nums:
+            return 1
+
+        t = type(0.0)
+
+        for i in nums:
+            if 0 <= i - 1 < len(nums):
+                nums[int(i) - 1] *= 1.0
+        i = 0
+        while i != len(nums):
+            if type(nums[i]) != t:
+                return i + 1
+            i += 1
+
+        return len(nums) + 1
+
 
 if __name__ == '__main__':
     solution = Solution()
