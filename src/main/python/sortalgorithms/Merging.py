@@ -5,15 +5,20 @@ from src.main.python.sortalgorithms.AbstractSorting import AbstractSorting
 
 class Merging(AbstractSorting):
     def sort(self, nums: List) -> List:
-        start, end = 0, len(nums)
-
-        return nums
+        if not nums:
+            return nums
+        n = len(nums)
+        start, end = 0, n - 1
+        return self.merge_sort(nums, start, end)
 
     def merge_sort(self, nums, start, end) -> List:
         if start == end:
-            return nums[start]
+            return [nums[start]]
 
-        mid = (start + end) / 2
+        mid = (start + end) // 2
+        result = self.merge(self.merge_sort(nums, start, mid), self.merge_sort(nums, mid + 1, end))
+
+        return result
 
     def merge(self, nums1: List, nums2: List) -> List:
         n, m = len(nums1), len(nums2)
@@ -31,4 +36,4 @@ class Merging(AbstractSorting):
 
 if __name__ == '__main__':
     sort = Merging()
-    print(sort.merge([3, 5, 7, 9, 11], [2, 4, 6]))
+    print(sort.sort([0, -1, 100, -5, 2, 4, 67, 4, 4, 4]))
