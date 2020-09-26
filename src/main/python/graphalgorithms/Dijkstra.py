@@ -2,7 +2,7 @@ from typing import List, Dict
 
 
 class Dijkstra:
-    MAX_WEIGHT = 1000000
+    MAX_WEIGHT = 1000000.0
 
     def shortestPath(self, n: int, edges: List[List[int]], succProb: List[float], start: int, end: int) -> float:
         graph = {}
