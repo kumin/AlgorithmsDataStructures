@@ -1,18 +1,30 @@
 class Solution:
-    def maxUniqueSplit(self, s: str) -> int:
-        unique_sub = []
-        s_length = len(s)
-        sub_str = ''
-        for c in s:
-            sub_str += c
-            if sub_str not in unique_sub:
-                unique_sub.append(sub_str)
-                sub_str = ''
-            elif s_length % 2 == 0:
-                unique_sub[len(unique_sub) - 1] = unique_sub[len(unique_sub) - 1] + sub_str
-                sub_str = ''
 
-        return len(unique_sub)
+    def __init__(self):
+        self.unique_substr = []
+        self.max_unique_substr = 0
+
+    def maxUniqueSplit(self, s: str) -> int:
+        n = len(s)
+
+        self.backtracking(0, s, n)
+
+        return self.max_unique_substr
+
+    def backtracking(self, index: int, s: str, n: int):
+        if index == n:
+            self.max_unique_substr = max(len(self.unique_substr), self.max_unique_substr)
+            return
+
+        sub = ''
+        for i in range(index, n):
+            sub += s[i]
+            if sub not in self.unique_substr:
+                self.unique_substr.append(sub)
+                self.backtracking(i + 1, s, n)
+                print(self.unique_substr)
+
+                self.unique_substr.remove(sub)
 
 
 if __name__ == '__main__':

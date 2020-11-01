@@ -21,6 +21,7 @@ class Dijkstra:
             if u is None or u == end:
                 break
             visited[u] = True
+            print(u)
             for i in range(n):
                 if visited[i]:
                     continue
@@ -58,4 +59,4 @@ if __name__ == '__main__':
     dijkstra = Dijkstra()
     print(
         dijkstra.shortestPath(5, [[0, 1], [0, 3], [0, 2], [2, 3], [1, 2]], [4, 10, 1, 10, 1], 0,
-                              1))
+                              3))
