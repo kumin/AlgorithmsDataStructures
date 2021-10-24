@@ -26,9 +26,7 @@ class HeapSort(AbstractSorting):
         return nums
 
     def swap(self, nums: List, i, j):
-        temp = nums[i]
-        nums[i] = nums[j]
-        nums[j] = temp
+        nums[i], nums[j] = nums[j], nums[i]
 
 
 if __name__ == '__main__':
